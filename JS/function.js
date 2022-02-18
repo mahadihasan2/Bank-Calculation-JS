@@ -7,6 +7,14 @@ function getAllInputValue(fliedId) {
     return depositValue
 }
 
+function getInnerTexValue(fliedId) {
+    const FliedId = document.getElementById(fliedId)
+    const fliedIdTax = FliedId.innerText
+    const value = parseFloat(fliedIdTax)
+    return value
+
+}
+
 function updateTotal(fliedId, amount) {
     const totalInput = document.getElementById(fliedId)
     const totaldepositeTax = totalInput.innerText
@@ -44,10 +52,11 @@ document.getElementById('deposit-button').addEventListener('click', function () 
 // Handdle WithDraw Using Function
 document.getElementById('withdraw-button').addEventListener('click', function () {
     const amount = getAllInputValue('withdraw-input')
-    if (amount > 0) {
+    const balanceTotal = getInnerTexValue('balance-total')
+    if (amount > 0 && amount <= balanceTotal) {
         updateTotal('withdraw-total', amount)
         updateBalance(amount, false)
     } else {
-        alert('Please Enter a Positive Value Withdraw')
+        alert('WithDraw Not Found')
     }
 })
